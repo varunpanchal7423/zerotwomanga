@@ -1,0 +1,15 @@
+const express = require('express')
+const app = express()
+app.set("view engine", "ejs")
+app.use(express.urlencoded({extended:true}))
+app.get('/', (req, res) => {
+    res.render("index")
+})
+
+const searchRouter = require('./routes/search')
+app.use("/search",searchRouter)
+const mangaRouter = require('./routes/manga')
+app.use("/manga",mangaRouter)
+const chapterRouter = require('./routes/chapter')
+app.use("/chapter",chapterRouter)
+app.listen(5000)

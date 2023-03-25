@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head> </head>
+<body>
+    <form action="/search" method="POST">
+        <lable>Enter Name
+            <input type="text" name="manganame" />
+        </lable>
+        <button type="submit">Search</button>
+    </form>
+    <h1>List of Manga</h1>
+    <% locals.data.forEach(function(data_fetch) { %>
+        <a href="/manga/<%=data_fetch.id%>"><%= data_fetch.attributes.title.en %></a><br>
+      <% }); %>
+    
+
+</body>
+</html>

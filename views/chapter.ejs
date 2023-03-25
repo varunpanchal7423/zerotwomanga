@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.cbz-image{
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+body {background-color: black;}
+.float-button1 {
+   position: fixed;
+   top: 10px;
+   right: 50px;
+}
+.float-button2 {
+   position: fixed;
+   top: 10px;
+   right: 20px;
+}
+</style>
+</head>
+<body>
+  <button id="increase-button" class="float-button1">+</button>
+    <button id="decrease-button" class="float-button2">-</button>
+    <div id="images" style='max-width: 100%;'>
+        <% for(let i=0 ; i < locals.data.length ; i++){ %>
+        <img src="<%=locals.data[i]%>" class="cbz-image"/>
+        <% } %>
+    </div>
+     <script>
+    // Get the increase button
+    var increaseButton = document.getElementById("increase-button");
+    // Get the decrease button
+    var decreaseButton = document.getElementById("decrease-button");
+    // Get the current max-width value
+    var currentMaxWidth = 80;
+
+    // Add an event listener to the increase button
+    increaseButton.addEventListener("click", function() {
+        // Increase the current max-width value
+        currentMaxWidth += 10;
+        // Update the max-width of the images
+        updateMaxWidth(currentMaxWidth);
+    });
+
+    // Add an event listener to the decrease button
+    decreaseButton.addEventListener("click", function() {
+        // Decrease the current max-width value
+        currentMaxWidth -= 10;
+        // Update the max-width of the images
+        updateMaxWidth(currentMaxWidth);
+    });
+
+    function updateMaxWidth(newMaxWidth) {
+    // Get all the image elements
+    var images = document.getElementsByClassName("cbz-image");
+    // Loop through the images
+    for (var i = 0; i < images.length; i++) {
+        // Set the width of the image
+        var originalWidth = images[i].naturalWidth;
+        var newWidth = originalWidth * (newMaxWidth / 100);
+        images[i].style.width = newWidth + "px";
+    }
+}
+</script>
+
+</body>
+</html>

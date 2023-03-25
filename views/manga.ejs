@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<head> </head>
+<body>
+    <h1>Manga Details</h1>
+    <% locals.data[1].forEach(function(data_fetch) { %>
+        <a href="/chapter/<%= data_fetch.id %>">Chapter <%= data_fetch.attributes.chapter %></a><br>
+      <% }); %>
+</body>
+</html>
