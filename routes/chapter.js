@@ -4,11 +4,12 @@ const router = express.Router()
 
 router.get("/:id" ,(req,res)=>{
     res.setHeader('Cache-Control', 'no-cache');
-    res.render("chapter",{data:req.data_stream})
+    res.render("chapter",{data: JSON.stringify(req.data_stream)})
 })
 
 router.param("id",(req,res,next,id) => {
     req.data_stream=[]
+    req.data_buffer=[]
     async function getdata (){
         const baseUrl = 'https://api.mangadex.org';
         let host, hash, data, dataSaver;

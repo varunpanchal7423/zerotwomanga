@@ -22,7 +22,8 @@ function logger(req,res,next){
             method: 'GET',
             url: `${baseUrl}/manga`,
             params: {
-                title: req.query.q
+                title: req.query.q,
+                includes: ["cover_art"]
             }
         });
         req.api_data =await resp.data.data;

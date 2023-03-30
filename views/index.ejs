@@ -1,16 +1,49 @@
 <!DOCTYPE html>
-<head> </head>
+<head>
+<style>
+    .container {
+        position: relative;
+        background-image: url(/src/background1.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:cover;
+
+    }
+
+    .search {
+        position: absolute;
+        border-radius: 50%;
+        top: 1%;
+        left: 45%;
+        height: 150px;
+        width: 20vw;
+        padding: 20px;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .imgbox {
+        display:grid;
+        height: 100%;
+    }
+    .center-fit {
+        max-width: 100%;
+        max-height: 100vh;
+        margin: auto;
+    }
+</style>
+</head>
 <body>
-    <h1>
-        Search for Manga
-    </h1>
-    <form action="/search" method="POST">
-        <lable>Enter Name
-            <input type="text" name="manganame" />
-        </lable>
-        <button type="submit">Search</button>
-    </form>
-    <p>Credit: Mangadex</p>
-    <p>Credit: Zerotwo</p>
+    
+    <div class="container">
+        <div class="imgbox">
+            <img class="center-fit" src='/src/cleansearcht.png'>
+        </div>
+        <form action="/search" method="POST">
+            <input class="search" type="search" style="font-size:20px;" placeholder="Search Manga here..." name="manganame" />
+        </form>
+    </div>
+
 </body>
 </html>

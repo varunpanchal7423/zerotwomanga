@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script>
+    const jsonStr = <%- locals.data %>;
+    for(var i = 0;i<jsonStr.length;i++){
+    var url = "/data?imgurl="+jsonStr[i];
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = function() {
+    const arrayBuffer = xhr.response;
+    var img = document.createElement("img");
+    img.src = "data:image/jpeg;base64,"+arrayBuffer;
+    img.classList.add("cbz-image");
+    document.getElementById("images").appendChild(img);
+    };
+    xhr.send();
+    }
+</script>
 <style>
 .cbz-image{
     max-width: 80%;
@@ -24,11 +39,7 @@ body {background-color: black;}
 <body>
   <button id="increase-button" class="float-button1">+</button>
     <button id="decrease-button" class="float-button2">-</button>
-    <div id="images" style='max-width: 100%;'>
-        <% for(let i=0 ; i < locals.data.length ; i++){ %>
-        <img src="<%=locals.data[i]%>" class="cbz-image"/>
-        <% } %>
-    </div>
+    <div id="images" style='max-width: 100%;'></div>
      <script>
     // Get the increase button
     var increaseButton = document.getElementById("increase-button");
