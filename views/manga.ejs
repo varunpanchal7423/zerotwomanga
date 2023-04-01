@@ -463,7 +463,8 @@ p {
     const p = document.createElement("p");
     var pp = jsonStr[0].attributes.description.en.split("[Official")
     var pfinal = pp[0].split("Translation")
-    const ptext = document.createTextNode(pfinal[0]);
+    var pf = pfinal[0].replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+    const ptext = document.createTextNode(pf);
     p.appendChild(ptext)
 
     const div_glowchapters = document.createElement('div');
