@@ -25,7 +25,10 @@ router.param("id",(req,res,next,id) => {
         req.data_stream.push(`${host}/data/${chapterHash}/${page}`)
         }
     }
-    getdata().then(() => (next()))
+    getdata().then(() => (next())).catch(function(error){
+        console.log("error",error.message);
+        next()
+    })
 })
 
 

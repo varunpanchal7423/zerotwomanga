@@ -1,11 +1,982 @@
 <!DOCTYPE html>
-<head>
+<html lang="en">
 
+<head>
+  <style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #161418;
+  color: #eee;
+  user-select: none;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#container {
+  padding: 5%;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.content-box {
+  max-width: 75%;
+}
+
+.title {
+  padding-left: 5%;
+}
+
+.description {
+  padding-left: 5%;
+}
+
+.nft {
+  flex-shrink: 0;
+  user-select: none;
+  margin: auto;
+  max-width: 260px;
+  border: 1px solid #ffffff22;
+  background-color: #282c34;
+  background: linear-gradient(0deg, #282c34 0%, rgba(17, 0, 32, 0.5) 100%);
+  box-shadow: 0 7px 20px 5px #00000088;
+  border-radius: 0.7rem;
+  transition: 0.5s all;
+}
+
+.nft .main {
+  display:block;
+  width: 90%;
+  padding: 1rem;
+}
+.nft .main .tokenImage {
+  border-radius: 0.5rem;
+  max-width: 100%;
+  height: 312px;
+  object-fit: cover;
+}
+
+
+.nft ::before {
+  position: fixed;
+  content: "";
+  box-shadow: 0 0 100px 40px #bdbcbc08;
+  top: -10%;
+  left: -100%;
+  height: 60rem;
+}
+.nft:hover {
+  border: 1px solid #ffffff44;
+  box-shadow: 0 7px 20px 10px #ffffffaa;
+  filter: brightness(1);
+}
+.nft:hover ::before {
+  filter: brightness(0.4);
+  top: -100%;
+  left: 200%;
+}
+
+
+
+.glowing-btn {
+  position: relative;
+  color: var(--glow-color);
+  cursor:default;
+  padding: 0.35em 1em;
+  border: 0.15em solid var(--glow-color);
+  border-radius: 0.45em;
+  background: none;
+  perspective: 2em;
+  font-family: "Raleway", sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+  letter-spacing: 1em;
+
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  animation: border-flicker 2s linear infinite;
+}
+
+.glowing-txt {
+  float: left;
+  margin-right: -0.8em;
+  -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+  animation: text-flicker 3s linear infinite;
+}
+
+.faulty-letter {
+  opacity: 0.5;
+  animation: faulty-flicker 2s linear infinite;
+}
+
+.glowing-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  filter: blur(1em);
+  transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+  background: var(--glow-color);
+  pointer-events: none;
+}
+
+
+
+@keyframes faulty-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 0.1;
+  }
+  4% {
+    opacity: 0.5;
+  }
+  19% {
+    opacity: 0.5;
+  }
+  21% {
+    opacity: 0.1;
+  }
+  23% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  83% {
+    opacity: 0.4;
+  }
+
+  87% {
+    opacity: 1;
+  }
+}
+
+@keyframes text-flicker {
+  0% {
+    opacity: 0.1;
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.1;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes border-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.1;
+  }
+
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .glowing-btn{
+    font-size: 1em;
+  }
+}
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+.glow-chapters {
+  text-align: center;
+  margin-top: 2%;
+  --glow-color: hsl(186 100% 69%);
+}
+
+.box{
+	position: relative;
+	width: 100%;
+	height: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+	background: #060c21;
+}
+.box:before{
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	background: #fff;
+	z-index: -1;
+}
+.box:after{
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	background: #fff;
+	z-index: -2;
+	filter: blur(40px);
+}
+.box:nth-child(1):before,
+.box:nth-child(1):after{
+	background: linear-gradient(180deg, #772aff, #010615, #2196F3);
+}
+.box .glass{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	display: block;
+	background: rgba(255,255,255,.1);
+	pointer-events: none;
+}
+.box .content{
+	padding: 20px;
+	color: #fff;
+}
+
+a{
+    position: relative;
+    display: inline-block;
+    padding: 25px 30px;
+    margin: 40px 0;
+    color: #03e9f4;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+   
+}
+a:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+}
+a:nth-child(1){
+    filter: hue-rotate(270deg);
+}
+a:nth-child(2){
+    filter: hue-rotate(110deg);
+}
+a span{
+    position: absolute;
+    display: block;
+}
+a span:nth-child(1){
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,transparent,#03e9f4);
+    animation: animate1 1s linear infinite;
+}
+@keyframes animate1{
+    0%{
+        left: -100%;
+    }
+    50%,100%{
+        left: 100%;
+    }
+}
+a span:nth-child(2){
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,transparent,#03e9f4);
+    animation: animate2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+@keyframes animate2{
+    0%{
+        top: -100%;
+    }
+    50%,100%{
+        top: 100%;
+    }
+}
+a span:nth-child(3){
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg,transparent,#03e9f4);
+    animation: animate3 1s linear infinite;
+    animation-delay: 0.50s;
+}
+@keyframes animate3{
+    0%{
+        right: -100%;
+    }
+    50%,100%{
+        right: 100%;
+    }
+}
+
+
+a span:nth-child(4){
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg,transparent,#03e9f4);
+    animation: animate4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+@keyframes animate4{
+    0%{
+        bottom: -100%;
+    }
+    50%,100%{
+        bottom: 100%;
+    }
+}
+
+.chapter-list{
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+p {
+  text-align: justify;
+}
+  </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  window.onload =() =>{
+    const jsonStr = <%- locals.data %>;
+
+    const div_flexcontainer = document.createElement("div");
+    div_flexcontainer.classList.add("flex-container");
+
+    const div_nft = document.createElement("div");
+    div_nft.classList.add("nft");
+
+    const div_main = document.createElement("div");
+    div_main.classList.add("main");
+
+    const img_tokenimage = document.createElement("img");
+    img_tokenimage.classList.add("tokenImage");
+    for(let j =0;j<jsonStr[0].relationships.length;j++){
+      if(jsonStr[0].relationships[j].type == "cover_art"){
+        const url = "/data?imgurl="+ "https://uploads.mangadex.org/covers/"+jsonStr[0].id+"/"+jsonStr[0].relationships[j].attributes.fileName;
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onload = function() {
+        const arrayBuffer = xhr.response
+        img_tokenimage.setAttribute("src","data:image/jpeg;base64,"+arrayBuffer)
+        };
+      }
+    }
+
+    const div_contentbox = document.createElement("div");
+    div_contentbox.classList.add("content-box");
+
+    const div_box = document.createElement("div");
+    div_box.classList.add("box");
+
+    const div_glass = document.createElement("div");
+    div_glass.classList.add("glass");
+
+    const div_content = document.createElement("div");
+    div_content.classList.add("content");
+
+    const h2 = document.createElement("h2");
+    const h2text = document.createTextNode(jsonStr[0].attributes.title.en);
+    h2.appendChild(h2text)
+    const p = document.createElement("p");
+    var pp = jsonStr[0].attributes.description.en.split("[Official")
+    var pfinal = pp[0].split("Translation")
+    const ptext = document.createTextNode(pfinal[0]);
+    p.appendChild(ptext)
+
+    const div_glowchapters = document.createElement('div');
+    div_glowchapters.classList.add("glow-chapters")
+
+    const button = document.createElement('button');
+    button.classList.add('glowing-btn');
+
+    const span1 = document.createElement('span');
+    span1.classList.add('glowing-txt');
+    const s1 = document.createTextNode('C');
+    span1.appendChild(s1);
+
+    const span2 = document.createElement('span');
+    span2.classList.add('faulty-letter');
+    const s2 = document.createTextNode('H');
+    span2.appendChild(s2);
+
+    const span3 = document.createElement('span');
+    span3.classList.add('faulty-letter');
+    const s3 = document.createTextNode('R');
+    span3.appendChild(s3);
+
+    const s4 = document.createTextNode('APTE');
+
+    const s5 = document.createTextNode('S');
+    span1.appendChild(span2)
+    span1.appendChild(s4)
+    span1.appendChild(span3)
+    span1.appendChild(s5)
+
+    button.appendChild(span1);
+    const div_chapterlist = document.createElement('div');
+    div_chapterlist.classList.add('chapter-list');
+    
+    for(i=0;i<jsonStr[1].length;i++){
+      const a_ch = document.createElement('a');
+      a_ch.href = "/chapter/"+jsonStr[1][i].id;
+      const textNode = document.createTextNode("Chapter "+jsonStr[1][i].attributes.chapter);
+      a_ch.appendChild(textNode);
+      a_ch.appendChild(document.createElement('span'));
+      a_ch.appendChild(document.createElement('span'));
+      a_ch.appendChild(document.createElement('span'));
+      a_ch.appendChild(document.createElement('span'));
+      
+      div_chapterlist.appendChild(a_ch);
+    }
+
+    div_glowchapters.appendChild(button);
+    div_content.appendChild(h2);
+    div_content.appendChild(p);
+    div_box.appendChild(div_glass);
+    div_box.appendChild(div_content);
+    div_contentbox.appendChild(div_box);
+    div_main.appendChild(img_tokenimage);
+    div_nft.appendChild(div_main);
+    div_flexcontainer.appendChild(div_nft);
+    div_flexcontainer.appendChild(div_contentbox);
+
+    const div_container = document.getElementById('container')
+    div_container.appendChild(div_flexcontainer);
+    div_container.appendChild(div_glowchapters);
+    div_container.appendChild(div_chapterlist);
+
+;(function (name, factory) {
+  if (typeof window === "object") {
+    window[name] = factory();
+  }
+})("Ribbons", function () {
+  var _w = window,
+    _b = document.body,
+    _d = document.documentElement;
+
+  // random helper
+  var random = function () {
+    if (arguments.length === 1) {
+      // only 1 argument
+      if (Array.isArray(arguments[0])) {
+        // extract index from array
+        var index = Math.round(random(0, arguments[0].length - 1));
+        return arguments[0][index];
+      }
+      return random(0, arguments[0]); // assume numeric
+    } else if (arguments.length === 2) {
+      // two arguments range
+      return Math.random() * (arguments[1] - arguments[0]) + arguments[0];
+    } else if (arguments.length === 4) {
+      //
+
+      var array = [arguments[0], arguments[1], arguments[2], arguments[3]];
+      return array[Math.floor(Math.random() * array.length)];
+      //return console.log(item)
+    }
+    return 0; // default
+  };
+
+  // screen helper
+  var screenInfo = function (e) {
+    var width = Math.max(
+        0,
+        _w.innerWidth || _d.clientWidth || _b.clientWidth || 0
+      ),
+      height = Math.max(
+        0,
+        _w.innerHeight || _d.clientHeight || _b.clientHeight || 0
+      ),
+      scrollx =
+        Math.max(0, _w.pageXOffset || _d.scrollLeft || _b.scrollLeft || 0) -
+        (_d.clientLeft || 0),
+      scrolly =
+        Math.max(0, _w.pageYOffset || _d.scrollTop || _b.scrollTop || 0) -
+        (_d.clientTop || 0);
+
+    return {
+      width: width,
+      height: height,
+      ratio: width / height,
+      centerx: width / 2,
+      centery: height / 2,
+      scrollx: scrollx,
+      scrolly: scrolly
+    };
+  };
+
+  // mouse/input helper
+  var mouseInfo = function (e) {
+    var screen = screenInfo(e),
+      mousex = e ? Math.max(0, e.pageX || e.clientX || 0) : 0,
+      mousey = e ? Math.max(0, e.pageY || e.clientY || 0) : 0;
+
+    return {
+      mousex: mousex,
+      mousey: mousey,
+      centerx: mousex - screen.width / 2,
+      centery: mousey - screen.height / 2
+    };
+  };
+
+  // point object
+  var Point = function (x, y) {
+    this.x = 0;
+    this.y = 0;
+    this.set(x, y);
+  };
+  Point.prototype = {
+    constructor: Point,
+
+    set: function (x, y) {
+      this.x = x || 0;
+      this.y = y || 0;
+    },
+    copy: function (point) {
+      this.x = point.x || 0;
+      this.y = point.y || 0;
+      return this;
+    },
+    multiply: function (x, y) {
+      this.x *= x || 1;
+      this.y *= y || 1;
+      return this;
+    },
+    divide: function (x, y) {
+      this.x /= x || 1;
+      this.y /= y || 1;
+      return this;
+    },
+    add: function (x, y) {
+      this.x += x || 0;
+      this.y += y || 0;
+      return this;
+    },
+    subtract: function (x, y) {
+      this.x -= x || 0;
+      this.y -= y || 0;
+      return this;
+    },
+    clampX: function (min, max) {
+      this.x = Math.max(min, Math.min(this.x, max));
+      return this;
+    },
+    clampY: function (min, max) {
+      this.y = Math.max(min, Math.min(this.y, max));
+      return this;
+    },
+    flipX: function () {
+      this.x *= -1;
+      return this;
+    },
+    flipY: function () {
+      this.y *= -1;
+      return this;
+    }
+  };
+
+  // class constructor
+  var Factory = function (options) {
+    this._canvas = null;
+    this._context = null;
+    this._sto = null;
+    this._width = 0;
+    this._height = 0;
+    this._scroll = 0;
+    this._ribbons = [];
+    this._options = {
+      // ribbon color HSL saturation amount
+      colorSaturation: "80%",
+      // ribbon color HSL brightness amount
+      colorBrightness: "60%",
+      // ribbon color opacity amount
+      colorAlpha: 0.65,
+      // how fast to cycle through colors in the HSL color space
+      colorCycleSpeed: 6,
+      // where to start from on the Y axis on each side (top|min, middle|center, bottom|max, random)
+      verticalPosition: "center",
+      // how fast to get to the other side of the screen
+      horizontalSpeed: 150,
+      // how many ribbons to keep on screen at any given time
+      ribbonCount: 3,
+      // add stroke along with ribbon fill colors
+      strokeSize: 0,
+      // move ribbons vertically by a factor on page scroll
+      parallaxAmount: -0.5,
+      // add animation effect to each ribbon section over time
+      animateSections: true
+    };
+    this._onDraw = this._onDraw.bind(this);
+    this._onResize = this._onResize.bind(this);
+    this._onScroll = this._onScroll.bind(this);
+    this.setOptions(options);
+    this.init();
+  };
+
+  // class prototype
+  Factory.prototype = {
+    constructor: Factory,
+
+    // Set and merge local options
+    setOptions: function (options) {
+      if (typeof options === "object") {
+        for (var key in options) {
+          if (options.hasOwnProperty(key)) {
+            this._options[key] = options[key];
+          }
+        }
+      }
+    },
+
+    // Initialize the ribbons effect
+    init: function () {
+      try {
+        this._canvas = document.createElement("canvas");
+        this._canvas.style["display"] = "block";
+        this._canvas.style["position"] = "fixed";
+        this._canvas.style["margin"] = "0";
+        this._canvas.style["padding"] = "0";
+        this._canvas.style["border"] = "0";
+        this._canvas.style["outline"] = "0";
+        this._canvas.style["left"] = "0";
+        this._canvas.style["top"] = "0";
+        this._canvas.style["width"] = "100%";
+        this._canvas.style["height"] = "100%";
+        this._canvas.style["z-index"] = "-1";
+        this._onResize();
+
+        this._context = this._canvas.getContext("2d");
+        this._context.clearRect(0, 0, this._width, this._height);
+        this._context.globalAlpha = this._options.colorAlpha;
+
+        window.addEventListener("resize", this._onResize);
+        window.addEventListener("scroll", this._onScroll);
+        document.body.appendChild(this._canvas);
+      } catch (e) {
+        console.warn("Canvas Context Error: " + e.toString());
+        return;
+      }
+      this._onDraw();
+    },
+
+    // Create a new random ribbon and to the list
+    addRibbon: function () {
+      // movement data
+      var dir = Math.round(random(1, 9)) > 5 ? "right" : "left",
+        stop = 1000,
+        hide = 200,
+        min = 0 - hide,
+        max = this._width + hide,
+        movex = 0,
+        movey = 0,
+        startx = dir === "right" ? min : max,
+        starty = Math.round(random(0, this._height));
+
+      // asjust starty based on options
+      if (/^(top|min)$/i.test(this._options.verticalPosition)) {
+        starty = 0 + hide;
+      } else if (/^(middle|center)$/i.test(this._options.verticalPosition)) {
+        starty = this._height / 2;
+      } else if (/^(bottom|max)$/i.test(this._options.verticalPosition)) {
+        starty = this._height - hide;
+      }
+
+      // ribbon sections data
+      var ribbon = [],
+        point1 = new Point(startx, starty),
+        point2 = new Point(startx, starty),
+        point3 = null,
+        color = Math.round(random(35, 35, 40, 40)),
+        delay = 0;
+
+      // buils ribbon sections
+      while (true) {
+        if (stop <= 0) break;
+        stop--;
+
+        movex = Math.round(
+          (Math.random() * 1 - 0.2) * this._options.horizontalSpeed
+        );
+        movey = Math.round((Math.random() * 1 - 0.5) * (this._height * 0.25));
+
+        point3 = new Point();
+        point3.copy(point2);
+
+        if (dir === "right") {
+          point3.add(movex, movey);
+          if (point2.x >= max) break;
+        } else if (dir === "left") {
+          point3.subtract(movex, movey);
+          if (point2.x <= min) break;
+        }
+        // point3.clampY( 0, this._height );
+        //console.log(Math.round(random(1, 5)))
+        ribbon.push({
+          // single ribbon section
+          point1: new Point(point1.x, point1.y),
+          point2: new Point(point2.x, point2.y),
+          point3: point3,
+          color: color,
+          delay: delay,
+          dir: dir,
+          alpha: 0,
+          phase: 0
+        });
+
+        point1.copy(point2);
+        point2.copy(point3);
+
+        delay += 4;
+        //color += 1
+        //console.log('colorCycleSpeed', color)
+      }
+      this._ribbons.push(ribbon);
+    },
+
+    // Draw single section
+    _drawRibbonSection: function (section) {
+      if (section) {
+        if (section.phase >= 1 && section.alpha <= 0) {
+          return true; // done
+        }
+        if (section.delay <= 0) {
+          section.phase += 0.02;
+          section.alpha = Math.sin(section.phase) * 1;
+          section.alpha = section.alpha <= 0 ? 0 : section.alpha;
+          section.alpha = section.alpha >= 1 ? 1 : section.alpha;
+
+          if (this._options.animateSections) {
+            var mod = Math.sin(1 + (section.phase * Math.PI) / 2) * 0.1;
+
+            if (section.dir === "right") {
+              section.point1.add(mod, 0);
+              section.point2.add(mod, 0);
+              section.point3.add(mod, 0);
+            } else {
+              section.point1.subtract(mod, 0);
+              section.point2.subtract(mod, 0);
+              section.point3.subtract(mod, 0);
+            }
+            section.point1.add(0, mod);
+            section.point2.add(0, mod);
+            section.point3.add(0, mod);
+          }
+        } else {
+          section.delay -= 0.5;
+        }
+        //console.log('section.color', section.color)
+        var s = this._options.colorSaturation,
+          l = this._options.colorBrightness,
+          c =
+            "hsla(" +
+            section.color +
+            ", " +
+            s +
+            ", " +
+            l +
+            ", " +
+            section.alpha +
+            " )";
+
+        this._context.save();
+
+        if (this._options.parallaxAmount !== 0) {
+          this._context.translate(
+            0,
+            this._scroll * this._options.parallaxAmount
+          );
+        }
+        this._context.beginPath();
+        this._context.moveTo(section.point1.x, section.point1.y);
+        this._context.lineTo(section.point2.x, section.point2.y);
+        this._context.lineTo(section.point3.x, section.point3.y);
+        this._context.fillStyle = c;
+        this._context.fill();
+
+        if (this._options.strokeSize > 0) {
+          this._context.lineWidth = this._options.strokeSize;
+          this._context.strokeStyle = c;
+          this._context.lineCap = "round";
+          this._context.stroke();
+        }
+        this._context.restore();
+      }
+      return false; // not done yet
+    },
+
+    // Draw ribbons
+    _onDraw: function () {
+      // cleanup on ribbons list to rtemoved finished ribbons
+      for (var i = 0, t = this._ribbons.length; i < t; ++i) {
+        if (!this._ribbons[i]) {
+          this._ribbons.splice(i, 1);
+        }
+      }
+
+      // draw new ribbons
+      this._context.clearRect(0, 0, this._width, this._height);
+
+      for (
+        var a = 0;
+        a < this._ribbons.length;
+        ++a // single ribbon
+      ) {
+        var ribbon = this._ribbons[a],
+          numSections = ribbon.length,
+          numDone = 0;
+
+        for (
+          var b = 0;
+          b < numSections;
+          ++b // ribbon section
+        ) {
+          if (this._drawRibbonSection(ribbon[b])) {
+            numDone++; // section done
+          }
+        }
+        if (numDone >= numSections) {
+          // ribbon done
+          this._ribbons[a] = null;
+        }
+      }
+      // maintain optional number of ribbons on canvas
+      if (this._ribbons.length < this._options.ribbonCount) {
+        this.addRibbon();
+      }
+      requestAnimationFrame(this._onDraw);
+    },
+
+    // Update container size info
+    _onResize: function (e) {
+      var screen = screenInfo(e);
+      this._width = screen.width;
+      this._height = screen.height;
+
+      if (this._canvas) {
+        this._canvas.width = this._width;
+        this._canvas.height = this._height;
+
+        if (this._context) {
+          this._context.globalAlpha = this._options.colorAlpha;
+        }
+      }
+    },
+
+    // Update container size info
+    _onScroll: function (e) {
+      var screen = screenInfo(e);
+      this._scroll = screen.scrolly;
+    }
+  };
+
+  // export
+  return Factory;
+});
+
+new Ribbons({
+  colorSaturation: "60%",
+  colorBrightness: "50%",
+  colorAlpha: 0.5,
+  colorCycleSpeed: 5,
+  verticalPosition: "random",
+  horizontalSpeed: 200,
+  ribbonCount: 3,
+  strokeSize: 0,
+  parallaxAmount: -0.2,
+  animateSections: true
+});
+}
+</script>
 </head>
+
+  
 <body>
-  <h1>Manga Details</h1>
-    <% locals.data[1].forEach(function(data_fetch) { %>
-        <a href="/chapter/<%= data_fetch.id %>">Chapter <%= data_fetch.attributes.chapter %></a><br>
-      <% }); %>
+<div id="container">
+
+</div>
 </body>
+
 </html>

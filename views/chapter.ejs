@@ -2,20 +2,23 @@
 <html>
 <head>
 <script>
+    window.onload = () => {
     const jsonStr = <%- locals.data %>;
     for(var i = 0;i<jsonStr.length;i++){
-    var url = "/data?imgurl="+jsonStr[i];
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.onload = function() {
-    const arrayBuffer = xhr.response;
-    var img = document.createElement("img");
-    img.src = "data:image/jpeg;base64,"+arrayBuffer;
-    img.classList.add("cbz-image");
-    document.getElementById("images").appendChild(img);
-    };
-    xhr.send();
+        const url = "/data?imgurl="+jsonStr[i];
+        
+        const img = document.createElement("img");
+        img.classList.add("cbz-image")
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onload = function() {
+            const arrayBuffer = xhr.response;
+            img.setAttribute("src","data:image/jpeg;base64,"+arrayBuffer)
+        };
+        document.getElementById("images").appendChild(img);
     }
+}
 </script>
 <style>
 .cbz-image{

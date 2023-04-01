@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get("/", logger ,(req,res)=>{
     res.setHeader('Cache-Control', 'no-cache');
-    res.render("search",{data: req.api_data})
+    res.render("search",{data: JSON.stringify(req.api_data)})
 })
 
 router.post('/',(req,res)=>{

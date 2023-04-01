@@ -5,7 +5,7 @@ const router = express.Router()
 router.get("/:id" ,(req,res)=>{
     res.setHeader('Cache-Control', 'no-cache');
     const feed_res = [req.api_data,req.chapt_feed]
-    res.render("manga",{data:feed_res})
+    res.render("manga",{data:JSON.stringify(feed_res)})
 })
 
 router.param("id",(req,res,next,id) => {
@@ -15,7 +15,10 @@ router.param("id",(req,res,next,id) => {
         var baseUrl = "https://api.mangadex.org"
         const resp = await axios({
             method: 'GET',
-            url: `${baseUrl}/manga/${id}`
+            url: `${baseUrl}/manga/${id}`,
+            params: {
+                includes: ["cover_art"]
+            }
         });
         req.api_data =await resp.data.data;
         var i = 0
